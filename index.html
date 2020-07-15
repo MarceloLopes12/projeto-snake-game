@@ -10,5 +10,55 @@
         <div class="conteiner-tela-centralizada">
             <canvas class="game" width="720px" height="400px"></canvas>
         </div>
+        <script>
+
+            const ctx = document.querySelector(".game").getContext('2d');
+
+            function alternadorCores(...cores) {
+
+                const tamanho = cores.length - 1
+                let posicao = 0
+
+                return {
+                    proximaCor: () => {
+                        const cor = cores[posicao]
+                        
+                        if(posicao < tamanho) {
+                            posicao++
+                        } else {
+                            posicao = 0
+                        }
+
+                        return cor
+                    } 
+                }
+            }    
+            function desenharCampo(ctx) {
+
+                const verdeClaro = '#689F38', verdeEscuro  = '#33691E'
+
+                const cores = alternadorCores(verdeClaro, verdeEscuro)
+
+                let x = 0, y = 0
+
+                for( y; y < 400; y += 20 ) {
+                    x = 0
+
+                    for( x; x < 720; x += 20 ) {
+                        ctx.fillStyle = cores.proximaCor()
+                        ctx.fillRect(x, y, 20, 20);
+                    }
+                    cores.proximaCor()
+                }
+
+            }
+
+            function desenharCobra(ctx) {
+                
+            }
+
+            desenharCampo(ctx)
+
+        </script>
     </body>
 </html>
